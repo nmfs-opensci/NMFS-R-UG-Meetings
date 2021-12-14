@@ -1,0 +1,2 @@
+# Notes from the session
+

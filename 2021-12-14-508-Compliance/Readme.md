@@ -2,6 +2,9 @@
 
 [Full meeting notes with the chat - NOAA access only](https://docs.google.com/document/d/1mrgtrSXVtPCTxrpBa_0ZbxEsnK9vcQzs6RIV3f-OTPw/edit#bookmark=id.a4g6djxgdqcz)
 
+[Link to slides on Google Drive - NOAA access only](https://docs.google.com/presentation/d/1PBJJs6o_9LMjJffCj5zjGwjUA0oGAXGicfukN6E_EKE/edit?usp=sharing)
+or 
+
 # 508 Compliance from the Editor’s Perspective
 
 9AM PT/12 ET NMFS R User Group discussion and tutorial about how to manually make documents 508 compliant and best practices we may be able to adapt to report writing in R. 

@@ -3,7 +3,7 @@
 [Full meeting notes with the chat - NOAA access only](https://docs.google.com/document/d/1mrgtrSXVtPCTxrpBa_0ZbxEsnK9vcQzs6RIV3f-OTPw/edit#bookmark=id.a4g6djxgdqcz)
 
 [Link to slides on Google Drive - NOAA access only](https://docs.google.com/presentation/d/1PBJJs6o_9LMjJffCj5zjGwjUA0oGAXGicfukN6E_EKE/edit?usp=sharing)
-or 
+or [See PDF of slides in this repo](https://github.com/nmfs-openscapes/NMFS-R-UG-Meetings/blob/main/2021-12-14-508-Compliance/A%20Brief%20Overview%20of%20Section%20508%20Compliance%20-%20final.pdf)
 
 # 508 Compliance from the Editor’s Perspective
 

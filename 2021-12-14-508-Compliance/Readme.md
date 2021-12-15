@@ -5,6 +5,8 @@
 [Link to slides on Google Drive - NOAA access only](https://docs.google.com/presentation/d/1PBJJs6o_9LMjJffCj5zjGwjUA0oGAXGicfukN6E_EKE/edit?usp=sharing)
 or [See PDF of slides in this repo](https://github.com/nmfs-openscapes/NMFS-R-UG-Meetings/blob/main/2021-12-14-508-Compliance/A%20Brief%20Overview%20of%20Section%20508%20Compliance%20-%20final.pdf)
 
+[Recording of the session - NOAA access only](https://drive.google.com/file/d/1GeHoX9Fq5GWkZmI8Ru7JTDv0V-7M3rE6/view?usp=sharing)
+
 # 508 Compliance from the Editor’s Perspective
 
 9AM PT/12 ET NMFS R User Group discussion and tutorial about how to manually make documents 508 compliant and best practices we may be able to adapt to report writing in R. 

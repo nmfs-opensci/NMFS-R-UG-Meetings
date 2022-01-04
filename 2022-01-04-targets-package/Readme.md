@@ -11,7 +11,7 @@
 * Pkgdown: https://docs.ropensci.org/targets/ 
 * Bookdown: https://books.ropensci.org/targets/ 
 * RStudio Cloud Minimal Example: https://rstudio.cloud/project/1430691
-* Will Landau Talks: R/medicine in 2021 (15 min); NY Open Stats Meetup 2020
+* Will Landau's Talks: [Target Markdown R/medicine in 2021](https://youtu.be/HJI5mQJRGpY); [NY Open Stats Meetup 2020](https://nyhackr.blob.core.windows.net/presentations/targets_Will-Landau.pdf)
 
 ## Overview
 

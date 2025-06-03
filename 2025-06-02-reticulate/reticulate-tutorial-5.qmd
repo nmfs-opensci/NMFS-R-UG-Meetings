@@ -1,0 +1,39 @@
+---
+title: "reticulate-tutorial - remote-sensing data on OPenDAP"
+format: html
+---
+
+Let's do this tutorial: <https://nmfs-opensci.github.io/NMFSHackDays-2025/topics-2025/2025-opendap/1-ncep-ncar.html>
+
+```{r}
+library(reticulate)
+
+py_require("xarray")
+
+# xarray optional dependencies
+py_require("pydap")
+py_require("netCDF4")
+py_require("zarr")
+py_require("dask")
+py_require("matplotlib")
+```
+
+```{python}
+base_url = 'http://psl.noaa.gov/thredds/dodsC/Datasets/ncep.reanalysis/surface/air.sig995'
+
+files = [f'{base_url}.{year}.nc' for year in range(1948, 2025)]
+len(files)
+```
+
+```{python}
+import xarray as xr
+ds = xr.open_dataset(files[0]);
+ds
+```
+
+```{python plot}
+import matplotlib.pyplot as plt
+plt.clf()
+ds['air'].isel(time=1).plot()
+plt.show()
+```

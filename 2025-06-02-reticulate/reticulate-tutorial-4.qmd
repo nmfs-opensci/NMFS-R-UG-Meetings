@@ -25,8 +25,10 @@ import earthaccess
 import xarray as xr
 
 #Authentication with Earthdata Login
-auth = earthaccess.login(strategy="netrc")
+auth = earthaccess.login(strategy="interactive")
+```
 
+```{python}
 #Access land ice height from ATLAS/ICESat-2 V005 (10.5067/ATLAS/ATL06.005), searching for data over western Greenland coast over two weeks in July 2022. The data are provided as HDF5 granules (files) that span about 1/14th of an orbit.
 
 results = earthaccess.search_data(short_name="ATL06",
@@ -37,5 +39,8 @@ results = earthaccess.search_data(short_name="ATL06",
 
 #Use xarray to load the data as a multifile dataset for a single group in the HDF5 file, in this case land ice segments:
 ds = xr.open_mfdataset(earthaccess.open(results), group='/gt1l/land_ice_segments')
+ds
+
+ds = xr.open_dataset(earthaccess.open(results)[1], group='/gt1l/land_ice_segments')
 ds
 ```

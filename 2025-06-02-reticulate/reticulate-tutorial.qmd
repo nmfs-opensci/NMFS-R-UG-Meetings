@@ -20,8 +20,8 @@ Install reticulate if needed then load.
 
 ```{r setup, message=FALSE}
 library(reticulate)
-py_bin <- reticulate::py_config()$python
-use_python(py_bin, required = TRUE)
+#py_bin <- reticulate::py_config()$python
+#use_python(py_bin, required = TRUE)
 ```
 
 ## Load Python packages with `py_require()`

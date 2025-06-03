@@ -1,0 +1,164 @@
+---
+title: "reticulate-tutorial - Only R"
+format: html
+---
+
+## Intro to reticulate
+
+**If you get any errors on rendering, restart R with Session > Restart R (RStudio) or R: Restart R Session (VSCode)**
+
+
+The `reticulate` package provides an R interface to Python. It allows you to run Python code directly within R, pass data between R and Python, and use Python libraries like NumPy, pandas, matplotlib, and scikit-learn.
+
+For simplicity, we will use `py_require()` from reticulate, which checks for and loads Python packages without requiring a separate Python installation step. This makes it easy to integrate Python in RMarkdown documents.
+
+---
+
+## Setup
+
+Install reticulate if needed then load.
+
+```{r setup, message=FALSE}
+library(reticulate)
+py_bin <- reticulate::py_config()$python
+use_python(py_bin, required = TRUE)
+```
+
+## Load Python packages with `py_require()`
+
+```{r py-require}
+py_require("pandas")
+pd <- import("pandas")
+```
+
+
+## Data Processing Example: Creating and Summarizing a DataFrame
+
+```{r dataframe}
+py_require("numpy")
+py_require("pandas")
+pd <- import("pandas")
+df <- pd$DataFrame(
+  list(
+    name = c("Alice", "Bob", "Carol"),
+    age = c(25, 30, 27),
+    score = c(88.5, 92.0, 85.0)
+  )
+)
+df
+```
+
+---
+
+## Data Visualization Example
+
+```{r}
+py_require("matplotlib")
+```
+
+```{r results='hide'}
+# Import matplotlib.pyplot as plt
+plt <- import("matplotlib.pyplot")
+
+# Create data
+x <- 1:10
+y <- x^2
+
+# Plot
+plt$figure()
+plt$plot(x, y)
+plt$title("Plot of x vs x^2")
+plt$xlabel("x")
+plt$ylabel("x squared")
+
+# Save the figure to a PNG file
+plt$savefig("plot_x_vs_x2.png", dpi = 150)
+plt$close()
+# If you are in the console you can do this
+# plt$show()
+```
+
+```{r}
+# Display in HTML
+knitr::include_graphics("plot_x_vs_x2.png")
+```
+
+---
+
+## Model Fitting Example
+
+```{r}
+py_require("scikit-learn")
+```
+
+
+```{r}
+np <- import("numpy")
+lm <- import("sklearn.linear_model")
+
+# Create toy data
+x <- matrix(1:10, ncol = 1)
+y <- matrix(2 * (1:10) + 3 + rnorm(10), ncol = 1)
+
+# Fit linear regression
+model <- lm$LinearRegression()$fit(x, y)
+cat("Intercept:", model$intercept_, "\n")
+cat("Coefficient:", model$coef_, "\n")
+```
+
+---
+
+## What is `py_require()` doing?
+
+### You don't need Python installed
+
+- It downloads and manages its own standalone Python runtime using the `r-reticulate` environment under the hood.
+- It does this transparently the first time you call `py_require()`
+
+### You don't need to worry about the environment set up
+
+
+
+- Installs the package using [`uv`](https://github.com/astral-sh/uv), a modern and fast Python package manager
+- Checks whether a specific Python package is available
+- If not found, automatically creates a **temporary Python environment**
+- Loads the package so it can be accessed with `reticulate::import()`
+
+This allows you to use Python in R without installing Python or setting up system-wide Python environments.
+
+### About `uv` and Temporary Environments
+
+When a Python package is missing, `py_require()` uses `uv` to:
+
+1. Create an **isolated Python environment** in a temporary cache location (e.g., `~/.cache/R/reticulate/`)
+2. Install the requested package (and its dependencies)
+3. Reuse that environment in future sessions when the same package is requested
+
+Because these environments are cached and isolated:
+
+- Your system Python installation is untouched
+- You avoid dependency conflicts
+- You don’t need admin or Conda access
+
+### Clearing out the temporary environment
+
+The `py_require()` function does not currently offer a built-in way to reset its temporary Python environment. At least, I don't know of one.
+
+```{r eval=FALSE}
+clear_py_require_env <- function() {
+  venv <- dirname(dirname(reticulate::py_config()$virtualenv))
+  message("Removing: ", venv)
+  unlink(venv, recursive = TRUE)
+  message("Done. Now restart your R session.")
+}
+clear_py_require_env()
+```
+
+Now you need to re-run `py_require()` to install stuff.
+
+## Summary
+
+- `reticulate` allows seamless use of Python in R.
+- `py_require()` makes it easy to load Python packages without manual setup.
+- You can process data, make plots, and fit models using familiar Python tools in RMarkdown.
+

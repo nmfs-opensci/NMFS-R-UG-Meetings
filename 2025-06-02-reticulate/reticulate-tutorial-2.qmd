@@ -1,0 +1,91 @@
+---
+title: "reticulate-tutorial - use Python blocks"
+format: html
+---
+
+## Reminder re clearing the environment caches
+
+**If you get any errors on rendering, restart R with Session > Restart R (RStudio) or R: Restart R Session (VSCode)**
+
+```{r eval=FALSE}
+clear_py_require_env <- function() {
+  venv <- dirname(dirname(reticulate::py_config()$virtualenv))
+  message("Removing: ", venv)
+  unlink(venv, recursive = TRUE)
+  message("Done. Now restart your R session.")
+}
+clear_py_require_env()
+```
+
+
+## Using Python blocks
+
+**If you get any errors on rendering, restart R with Session > Restart R (RStudio) or R: Restart R Session (VSCode)**
+
+For simplicity, we will use `py_require()` to set up Python for use, but we will use `{python}` blocks for our Python code.
+
+---
+
+## Setup
+
+Install reticulate if needed then load. You have to do the `py_config()` bit inside Rmd or qmd for rendering to work. If you are running code interactively, you don't have to do this.
+
+```{r setup, message=FALSE}
+library(reticulate)
+py_bin <- reticulate::py_config()$python
+use_python(py_bin, required = TRUE)
+```
+
+## Load Python packages with `py_require()`
+
+This is required.
+
+```{r py-require}
+py_require("pandas")
+```
+
+
+## Data Processing Example: Creating and Summarizing a DataFrame
+
+```{python}
+# Import packages (assumes environment already has them installed)
+import pandas as pd
+
+# Create DataFrame
+df = pd.DataFrame({
+    "name": ["Alice", "Bob", "Carol"],
+    "age": [25, 30, 27],
+    "score": [88.5, 92.0, 85.0]
+})
+
+# Print the DataFrame
+print(df)
+```
+
+---
+
+## Data Visualization Example
+
+We need to do the `py_require()` bit in R and after we can switch to Python.
+
+```{r}
+py_require("matplotlib")
+```
+
+```{python}
+import matplotlib.pyplot as plt
+
+# Create data
+x = list(range(1, 11))
+y = [i**2 for i in x]
+
+# Plot
+plt.figure()
+plt.plot(x, y)
+plt.title("Plot of x vs x^2")
+plt.xlabel("x")
+plt.ylabel("x squared")
+plt.grid(True)
+plt.show()
+```
+

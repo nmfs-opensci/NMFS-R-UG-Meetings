@@ -1,0 +1,41 @@
+---
+title: "reticulate-tutorial - remote-sensing data"
+format: html
+---
+
+```{r}
+# pak::pak("reticulate")
+
+library(reticulate)
+
+py_require("earthaccess")
+py_require("xarray")
+
+# xarray optional dependencies
+py_require("h5netcdf")
+py_require("netCDF4")
+py_require("zarr")
+py_require("dask")
+py_require("matplotlib")
+```
+
+```{python}
+#Import packages
+import earthaccess
+import xarray as xr
+
+#Authentication with Earthdata Login
+auth = earthaccess.login(strategy="netrc")
+
+#Access land ice height from ATLAS/ICESat-2 V005 (10.5067/ATLAS/ATL06.005), searching for data over western Greenland coast over two weeks in July 2022. The data are provided as HDF5 granules (files) that span about 1/14th of an orbit.
+
+results = earthaccess.search_data(short_name="ATL06",
+                                  version="006",
+                                  cloud_hosted=True,
+                                  temporal = ("2022-07-17","2022-07-31"),
+                                  bounding_box = (-51.96423,68.10554,-48.71969,70.70529))
+
+#Use xarray to load the data as a multifile dataset for a single group in the HDF5 file, in this case land ice segments:
+ds = xr.open_mfdataset(earthaccess.open(results), group='/gt1l/land_ice_segments')
+ds
+```

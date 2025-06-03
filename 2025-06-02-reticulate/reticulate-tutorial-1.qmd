@@ -108,6 +108,16 @@ cat("Coefficient:", model$coef_, "\n")
 
 ---
 
+```{r}
+pd <- import("pandas", convert=FALSE)
+df_py <- pd$DataFrame(dict(name = c("Alice", "Bob"), age = c(30, 25)))
+df_r <- py_to_r(df_py)
+class(df_r)
+class(df_py)
+```
+
+---
+
 ## What is `py_require()` doing?
 
 ### You don't need Python installed
